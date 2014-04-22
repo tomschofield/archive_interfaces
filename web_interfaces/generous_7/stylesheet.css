@@ -1,0 +1,38 @@
+html{
+	background-color: grey;
+	font-family: arial;
+	font-size:14px;
+}
+#container {
+	width:800px;
+	height:800px;
+	position: relative;
+	margin-left:auto;
+  	margin-right:auto;
+    background-color: black; /* Added to show the actual size */
+   // text-align:center;
+}
+#image_container{
+  float:left;
+	border:2px solid;
+  	border-radius:5px; 
+  	border-color: black;
+  	width: 200px;
+  	height:1000px;
+  	overflow:scroll;
+
+}
+span {
+
+}
+canvas {
+	
+  
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto; 
+}

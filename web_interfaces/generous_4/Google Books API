@@ -1,0 +1,10 @@
+Google Books API
+key = AIzaSyAtOf1n2bUYvR_k7HGTNrWsXA57-H6ttW4
+https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyATuyn_SO2TMdFOO_KqrQY6cfJvl_hwLiw
+
+
+//search
+https://www.googleapis.com/books/v1/volumes?q=search+terms
+
+
+https://www.googleapis.com/books/v1/volumes?q=inauthor:duffy&key=AIzaSyATuyn_SO2TMdFOO_KqrQY6cfJvl_hwLiw
