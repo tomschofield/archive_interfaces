@@ -1,6 +1,21 @@
 <?php
 
 //c01 [0] c02 (series level) = Published Poetry by Author
+/*
+c02 [0] = Published Poetry by Author
+c02 [1] = Poetry Anthologies, Collaborations and Translations by Title
+c02 [2] = Literary Criticism by Author
+c02 [3] = Prose, Fiction and Photography by Author
+
+
+
+
+*/
+
+
+
+
+
 
 function foo(){
 	foreach ($xml->xpath('//c01') as $c01) {
@@ -336,14 +351,182 @@ function getAuthorForItem($itemID){
 	}
 	return $authorName;
 }
-function getTitleForItemInCollections($itemID){
+function getAuthorAndTitleForItem($itemID){
 
 	$authorName="";
+	$titleName = "";
+	$itemTitle = "";
 	$xml=simplexml_load_file("edit.xml");
 
 	$apath = $xml->xpath('//c01') ;
 
-	$c02 = $apath[0]->xpath('//c02')[1];
+	$c02 = $apath[0]->xpath('//c02')[0];
+
+	
+	$count =0;
+	foreach ( $c02 as $c03) {
+		//echo $c03['level'],"\n";
+		//c3 is author level : series
+		foreach ($c03->children() as $first_gen) {
+			//this level will give us each authors stuff
+			//echo "	",$first_gen['level'],"\n";
+			if($first_gen->getName()=='did'){
+				//echo $first_gen['level'],"\n";
+				$title = (string)$first_gen->unittitle;
+				$thisAuthor = $title;
+				$id = (string)$first_gen->unitid;
+				$date = (string)$first_gen->unitdate;
+				//echo "Subseires (ie author ) title ",$title," id ",$id," date ",$date,"\n";
+			}
+			if($first_gen->getName()=='bioghist'){
+				
+				//echo "bioghist p  ",$first_gen->p,"\n";
+			}
+			if($first_gen->getName()=='scopecontent'){
+				
+				//echo "scopecontent p  ",$first_gen->p,"\n";
+			}
+
+			//and now for individual files - that doesn\t mean individual items!
+			if($first_gen->getName()=='c04'){
+				//go through each file for each author
+				foreach ($first_gen->children() as $second_gen) {
+					//echo $second_gen->getName(),"\n";
+					if($second_gen->getName()=='did'){
+						//echo $first_gen['level'],"\n";
+						$title = (string)$second_gen->unittitle;
+						$itemTitle = $title;
+						$id = (string)$second_gen->unitid;
+						$date = (string)$second_gen->unitdate;
+						if($itemID==$id){
+									//$titleName = (string)$third_gen->unittitle;
+									$authorName = $thisAuthor;
+									$finalItemTitle = $itemTitle;
+						}
+						//echo "	File title ",$title," id ",$id," date ",$date,"\n";
+					}
+					//and now for individual items! 
+					if($second_gen->getName()=='c05'){
+
+						foreach ($second_gen->children() as $third_gen) {
+							
+							if($third_gen->getName()=='did'){
+								//echo $first_gen['level'],"\n";
+								$title = (string)$third_gen->unittitle;
+								
+								$id = (string)$third_gen->unitid;
+								
+								$date = (string)$third_gen->unitdate;
+								//echo "		Item title ",$title," id ",$id," date ",$date,"\n";
+							}
+						}	
+					}
+					
+				}
+			}
+			//echo "	first _gen ",$first_gen->getName()," ",$first_gen['level'],"\n";
+		}
+		
+	}
+	$authorAndTitle = array();
+	array_push($authorAndTitle, $authorName);
+	array_push($authorAndTitle, $finalItemTitle);
+	array_push($authorAndTitle, $titleName);
+
+	return $authorAndTitle;
+}
+function getAuthorAndTitleForItemFileLevelItem($itemID){
+
+	$authorName="";
+	$titleName = "";
+	$itemTitle = "";
+	$xml=simplexml_load_file("edit.xml");
+
+	$apath = $xml->xpath('//c01') ;
+
+	$c02 = $apath[0]->xpath('//c02')[0];
+
+	
+	$count =0;
+	foreach ( $c02 as $c03) {
+		//echo $c03['level'],"\n";
+		//c3 is author level : series
+		foreach ($c03->children() as $first_gen) {
+			//this level will give us each authors stuff
+			//echo "	",$first_gen['level'],"\n";
+			if($first_gen->getName()=='did'){
+				//echo $first_gen['level'],"\n";
+				$title = (string)$first_gen->unittitle;
+				$thisAuthor = $title;
+				$id = (string)$first_gen->unitid;
+				$date = (string)$first_gen->unitdate;
+				//echo "Subseires (ie author ) title ",$title," id ",$id," date ",$date,"\n";
+			}
+			if($first_gen->getName()=='bioghist'){
+				
+				//echo "bioghist p  ",$first_gen->p,"\n";
+			}
+			if($first_gen->getName()=='scopecontent'){
+				
+				//echo "scopecontent p  ",$first_gen->p,"\n";
+			}
+
+			//and now for individual files - that doesn\t mean individual items!
+			if($first_gen->getName()=='c04'){
+				//go through each file for each author
+				foreach ($first_gen->children() as $second_gen) {
+					//echo $second_gen->getName(),"\n";
+					if($second_gen->getName()=='did'){
+						//echo $first_gen['level'],"\n";
+						$title = (string)$second_gen->unittitle;
+						$itemTitle = $title;
+						$id = (string)$second_gen->unitid;
+						$date = (string)$second_gen->unitdate;
+						//echo "	File title ",$title," id ",$id," date ",$date,"\n";
+					}
+					//and now for individual items! 
+					if($second_gen->getName()=='c05'){
+
+						foreach ($second_gen->children() as $third_gen) {
+							
+							if($third_gen->getName()=='did'){
+								//echo $first_gen['level'],"\n";
+								$title = (string)$third_gen->unittitle;
+								
+								$id = (string)$third_gen->unitid;
+								if($itemID==$id){
+									$titleName = (string)$third_gen->unittitle;
+									$authorName = $thisAuthor;
+									$finalItemTitle = $itemTitle;
+								}
+								$date = (string)$third_gen->unitdate;
+								//echo "		Item title ",$title," id ",$id," date ",$date,"\n";
+							}
+						}	
+					}
+					
+				}
+			}
+			//echo "	first _gen ",$first_gen->getName()," ",$first_gen['level'],"\n";
+		}
+		
+	}
+	$authorAndTitle = array();
+	array_push($authorAndTitle, $authorName);
+	array_push($authorAndTitle, $finalItemTitle);
+	array_push($authorAndTitle, $titleName);
+
+	return $authorAndTitle;
+}
+function getItemListFromPoetryByAuthor(){
+
+	$authorName="";
+	$itemList = array();
+	$xml=simplexml_load_file("edit.xml");
+
+	$apath = $xml->xpath('//c01') ;
+
+	$c02 = $apath[0]->xpath('//c02')[0];
 
 	
 	$count =0;
@@ -381,10 +564,6 @@ function getTitleForItemInCollections($itemID){
 						
 						$id = (string)$second_gen->unitid;
 						$date = (string)$second_gen->unitdate;
-						if($itemID==$id){
-									
-									$authorName = $thisAuthor;
-								}
 						//echo "	File title ",$title," id ",$id," date ",$date,"\n";
 					}
 					//and now for individual items! 
@@ -397,12 +576,126 @@ function getTitleForItemInCollections($itemID){
 								$title = (string)$third_gen->unittitle;
 								
 								$id = (string)$third_gen->unitid;
+								array_push($itemList, $id);
 								
 								$date = (string)$third_gen->unitdate;
 								//echo "		Item title ",$title," id ",$id," date ",$date,"\n";
 							}
 						}	
 					}
+					
+				}
+			}
+			//echo "	first _gen ",$first_gen->getName()," ",$first_gen['level'],"\n";
+		}
+		
+	}
+	return $itemList;
+}
+function getAuthorListFromPoetryByAuthor(){
+
+	$authorNames=array();
+	$xml=simplexml_load_file("edit.xml");
+
+	$apath = $xml->xpath('//c01') ;
+
+	$c02 = $apath[0]->xpath('//c02')[0];
+
+	
+	$count =0;
+	foreach ( $c02 as $c03) {
+		//echo $c03['level'],"\n";
+		//c3 is author level : series
+		foreach ($c03->children() as $first_gen) {
+			//this level will give us each authors stuff
+			//echo "	",$first_gen['level'],"\n";
+			if($first_gen->getName()=='did'){
+				//echo $first_gen['level'],"\n";
+				$title = (string)$first_gen->unittitle;
+				$thisAuthor = $title;
+				array_push($authorNames, $thisAuthor);
+				$id = (string)$first_gen->unitid;
+				$date = (string)$first_gen->unitdate;
+				//echo "Subseires (ie author ) title ",$title," id ",$id," date ",$date,"\n";
+			}
+
+			//echo "	first _gen ",$first_gen->getName()," ",$first_gen['level'],"\n";
+		}
+		
+	}
+	return $authorNames;
+}
+function getTitleForItemInCollections($itemID){
+
+	$authorName="";
+	$xml=simplexml_load_file("edit.xml");
+
+	$apath = $xml->xpath('//c01') ;
+
+	$c02 = $apath[0]->xpath('//c02')[1];
+
+	
+	$count =0;
+	foreach ( $c02 as $c03) {
+		//echo $c03['level'],"\n";
+		//c3 is author level : series
+		foreach ($c03->children() as $first_gen) {
+			//this level will give us each authors stuff
+			//echo "	",$first_gen['level'],"\n";
+			if($first_gen->getName()=='did'){
+				//echo $first_gen['level'],"\n";
+				$title = (string)$first_gen->unittitle;
+				$thisAuthor = $title;
+				$id = (string)$first_gen->unitid;
+				$date = (string)$first_gen->unitdate;
+				//echo "Subseires (ie title of collected word ) title ",$title," id ",$id," date ",$date,"\n";
+			}
+			if($first_gen->getName()=='bioghist'){
+				
+				//echo "bioghist p  ",$first_gen->p,"\n";
+			}
+			if($first_gen->getName()=='scopecontent'){
+				
+				//echo "scopecontent p  ",$first_gen->p,"\n";
+			}
+
+			//and now for individual files - that doesn\t mean individual items!
+			if($first_gen->getName()=='c04'){
+				//go through each file for each author
+				foreach ($first_gen->children() as $second_gen) {
+					//echo $second_gen->getName(),"\n";
+					if($second_gen->getName()=='did'){
+						//echo $first_gen['level'],"\n";
+						$title = (string)$second_gen->unittitle;
+						
+						$id = (string)$second_gen->unitid;
+						//echo $itemID,' ',$id,"\n";
+						$date = (string)$second_gen->unitdate;
+						if($itemID==$id){
+									//echo 'found';
+									$authorName = $thisAuthor;
+						}
+						//echo "	File title ",$title," id ",$id," date ",$date,"\n";
+					}
+					//and now for individual items! - OOPS there are none in the collections
+					// if($second_gen->getName()=='c05'){
+
+					// 	foreach ($second_gen->children() as $third_gen) {
+							
+					// 		if($third_gen->getName()=='did'){
+					// 			//echo $first_gen['level'],"\n";
+					// 			$title = (string)$third_gen->unittitle;
+								
+					// 			$id = (string)$third_gen->unitid;
+					// 			echo $id,"\n";
+					// 			$date = (string)$third_gen->unitdate;
+					// 			if($itemID==$id){
+					// 				echo 'found';
+					// 			}
+					// 			//echo "		Item title ",$title," id ",$id," date ",$date,"\n";
+					// 		}
+					// 	}	
+					// }
 					
 				}
 			}
@@ -658,7 +951,7 @@ function getInfoForItem($itemID){
 									    "fileList" => $thisFileList
 									);
 									return $aRecord;
-									echo 'match';
+									//echo 'match';
 								}
 								$date = (string)$third_gen->unitdate;
 								//echo "		Item title ",$title," id ",$id," date ",$date,"\n";
@@ -689,20 +982,50 @@ function printFileListForAuthor($author){
 		echo "\n";
 	}
 }
-	//echo getInfoForAuthor('David Constantine')["bio"],"\n";
-	//printFileListForAuthor('Jackie Kay');
-	//$myAuthor = getTitleForItemInCollections('BXB/1/2/TRE/5');
-	$myAuthor = getAuthorForItem ('BXB/1/1/HEW/1/1');
-	echo $myAuthor;
+function getFondFromRef($ref){
+	$exploded = explode('/', $ref);
+		//echo $exploded,"\n";
 
-	$info =  getInfoForAuthor($myAuthor);
-	foreach ($info as $key => $value) {
-		echo $key , " : ",$value,"\n";
+	if(sizeof($exploded)>0){
+		return $exploded[2];
 	}
-	foreach ($info['fileList'] as $key => $value) {
-		echo $key , " : ",$value,"\n";
-		foreach ($value as $fileInfo) {
-			echo $fileInfo,"\n";
-		}
+	else{
+		return 0;
 	}
+}
+function getItemRefFromFileName($filename){
+	$exploded = explode('.', $filename);
+	$exploded1 = explode(' ', $exploded[0]);
+	$replaced = str_replace ( '-' , '/' ,$exploded1[0] );
+	return $replaced;
+}
+function getAuthorAbbrFromRef($ref){
+			//eg BXB/1/1/ZEP/2/3
+		$exploded = explode('/', $ref);
+		return $exploded[3];
+}
+function generateAuthorRefMappingList(){
+	$authors = getAuthorListFromPoetryByAuthor();
+	$data = array();
+		foreach ($authors as $key => $value) {
+		$theseItems = getInfoForAuthor($value)["fileList"];
+		$aRef = getAuthorAbbrFromRef($theseItems[0]["id"]);
+		//echo $value," : ",$aRef,", ";
+		$data[$aRef]= $value;
+		
+	}
+	//echo "\n";
+	return $data;
+}
+function getAuthorNameFromAbr($abr, $lookup){
+	return $lookup[$abr];
+}
+//print_r(getAuthorListFromPoetryByAuthor());
+//$mapList = generateAuthorRefMappingList();
+//echo getAuthorNameFromAbr("MUR", $mapList);
+//BXB-1-2-TEN-1.pdf
+	//echo getInfoForAuthor('David Constantine')["bio"],"\n";
+
+	//echo  getTitleForItemInCollections($ref);
+
 ?>
