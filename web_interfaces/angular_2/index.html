@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-App="">
+<head>
+	<title>Bloodaxe Archive</title>
+	 <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+
+</head>
+<body ng-controller="angControl">
+<!-- 	<div id ="test" ng-click ="test()">{{test()}}</div>
+ -->
+ 	<div id="container" >
+ 		<h1 id="headerText1">Bloodaxe Archive</h1>
+ 		<h2 id="headerText2">Poetry in the Research Archive</h2>
+ 		<img src="images/header_1.png">
+ 		<div id="filters">
+		 	<div class="untest" ng-class="{test:move}" ng-repeat="i in test()">
+		 		<div ng-style="myStyle" ng-click ="move=!move; myStyle={'color':testColor(move)} ">  {{i}}</div>
+		 	</div>
+	 	</div>
+	 	
+ 		<div id="graph">
+ 			<div class="bar" ng-repeat="i in dates track by $index" ng-click="setFilter(i)" ng-style='{"height":i[1]+"px", "width":getBarWidth(getYearStats())+"px" }' >	</div>
+ 		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
+		<script type="text/javascript" src="controller.js"></script>
+
+		<div id="book_thumbs">
+			<div class="bar" ng-repeat="i in book_thumbs">
+			</div>
+		</div>
+		<ul>
+			<li ng-click="fade=!fade" ng-class="{hasImages : i.hasImages}" ng-repeat="i in books |filter:txtfilter">
+				
+				<span id="title">{{i["title"]}}</span>
+				<ul>
+					<li  ng-if="i.hasImages" ng-repeat="j in i.individualFiles" >
+						{{j.title}}
+						<ul>
+							<img  ng-class="{'faded':fade}"  ng-repeat="k in j.imagePaths" ng-src={{k}} height="100px" />
+						</ul>	
+					</li> 
+				</ul>
+			</li>
+		</ul>
+		<div id="authors">
+		 	<div class="author"  ng-repeat="i in people" ng-click="setAuthorFilter(i.author)">
+		 		<div ng-style="myStyle" ng-click ="myStyle={'color':testColor(move)} ">  {{i.author}}</div>
+		 	</div>
+	 	</div>
+	</div>
+</body>	
+</html>
+
+

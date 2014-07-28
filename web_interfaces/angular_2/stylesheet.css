@@ -1,0 +1,130 @@
+html{
+	font-family: sans-serif;
+	background-color: silver;
+}
+body {
+    background-image: url("images/background_3.jpg");
+}
+#headerText1{
+	font-size: 36pt;
+	position: absolute;
+	top:40px;
+
+}
+#headerText2{
+	font-size: 24pt;
+	position: absolute;
+	top:110px;
+}
+#filters{
+	margin-top: 10px;
+	text-align: center;
+}
+#description{
+	background-color: darkGray;
+}
+#title{
+	/*background-color: white;*/
+}
+img{
+	opacity: 1;
+	display: inline-block;
+	-webkit-transition: opacity 2s; /* For Safari 3.1 to 6.0 */
+}
+#container {
+	width:700px;
+	height:auto;
+	/*position: relative;*/
+	background-color: lightGray;
+	opacity: 0.9;
+	margin:0 auto;
+	display: block;
+	border:2px solid;
+	border-radius:2px; 
+	border-color: gray;
+	padding-top: 10px;
+	position: relative;
+	top:30px;
+	/*position: relative;
+  	top:20px;
+	margin-left:auto;
+  	margin-right:auto;*/
+   
+}
+img.faded{
+	opacity: 0.5;
+}
+.hasImages{
+	background-color: darkGray;
+}
+
+img.faded{
+	display: none;
+}
+div{
+	position: relative;
+	color:teal;
+	display: inline-block;
+
+	
+	-webkit-transition: color 0.5s;
+}
+div.test{
+	/*left:50px;*/
+	
+	border:2px solid;
+	border-radius:2px; 
+	border-color: lightGray;
+	padding: 5px;
+
+	margin-left: auto;
+    margin-right: auto;
+}
+div.untest{
+	background-color: #F8F8F8;
+	border:2px solid;
+	border-radius:2px; 
+	/*display: inline-block;*/
+	border-color: lightGray;
+	padding: 5px;
+	vertical-align: top;
+    display: inline-block;
+    /**display: inline;*/
+    zoom: 1;
+	/*margin-left: auto;
+    margin-right:  auto;*/
+}
+div.hidden{
+	display: none;
+	color:teal;
+	display: inline-block;
+	border:2px solid;
+	border-radius:5px; 
+	border-color: gray;
+	padding: 10px;
+	margin-right: 5px;
+}
+.bar{
+	/*height:80px;*/
+	background-color: #B76EB8;
+	width:50px;
+	border:1px solid;
+	border-color: white;
+}
+#graph{
+	margin-top: 30px;
+}
+#authors{
+	text-align: center;
+}
+.author{
+	background-color: #F8F8F8;
+	font-size: 8pt;
+	border:2px solid;
+	border-radius:2px; 
+	border-color: lightGray;
+	padding: 5px;
+
+	margin-left: auto;
+    margin-right: auto;
+}
