@@ -1,0 +1,225 @@
+/* CSS reset for standard amongst different browsers */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td {
+	margin:0;
+	padding:0;
+}
+
+.home {
+	/* font-family: Arial, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.5em;
+	background-color: rgb(244,239,221);
+	width: 80px;
+	padding: 8px;
+	border: 5px solid #2f3011;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	color: #292f63 !important; */
+	margin-top: 250px;
+	left: 60px;
+	position: fixed;
+	z-index: 1;
+	opacity: 0.5;
+}
+
+#mail {
+	color: #f4efdd !important;
+}
+
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+	color: #f4efdd;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+fieldset, img {
+	border:0;
+}
+
+ul {
+	list-style:none;
+	list-style-position:outside;
+}
+
+/* how to display html5 elements for old browsers */
+header, section, footer, article {
+	display: block;
+}
+
+body {
+	background-color: #4a4c41;
+	font-family: Arial, sans-serif;
+	/* font-family: 'Raleway', sans-serif; */
+	font-size: 12px;
+}
+
+p {
+	line-height: 150%;
+	color: #f4efdd;
+}
+
+.wrapper {
+	width: 100%;
+	margin: 0 auto;
+	margin-left: 50px;
+}
+
+header {
+	height: 70px;
+	background-color: rgba(74,76,4,0.5);
+	position: fixed;
+	top: 0px;
+	width: 100%;
+}
+
+h1.logo {
+	display: block;
+	float: top;
+	padding-top: 15px;
+	color: #f4efdd;
+	font-size: 36px;
+}
+
+.main {
+	font-family: 'Lora', serif;
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.5em;
+	float: left;
+	background-color: #4a4c41;
+	width: 40px;
+	padding: 5px;
+	border: 5px solid #4a4c22;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	margin: 10px;
+	color: #f4efdd;
+}
+
+#mainBlock {
+	display: block;
+	position: absolute;
+	z-index: -1;
+	margin-top: 90px;
+	width: 100%;
+	margin-bottom: 200px;
+	height: 900px;
+}
+
+.about {
+	float: top;
+	background-color: rgba(47,48,17,0.5);
+	border-top: 5px solid #f4efdd;
+	border-bottom: 5px solid #f4efdd;
+	padding: 5px;
+	font-family: 'Lora', serif;
+	position: fixed;
+	top: 70px;
+	width: 100%;
+}
+
+footer {
+	height: 40px;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	background-color: #4a4c22;
+	border-top: 5px solid #f4efdd;
+	padding: 5px;
+	color: #f4efdd;
+	position: fixed;
+}
+
+footer h4 {
+	clear: both;
+}
+
+.active {
+    background-color:#556677;
+}
+
+.popup {
+	border-radius: 5px;
+}
+
+.meta {
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	text-align: left;
+	font-size: 1.2em;
+	float: left;
+	background-color: #ffffcc;
+	width: 600px;
+	padding: 5px;
+	border: 5px solid #2f3011;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	margin: 10px;
+	margin-top: 315px;
+	margin-left: 50px;
+	display: inline;
+}
+
+.meta p {
+	color: #2f3011;
+}
+
+.data {
+	font-family: 'Lora', serif;
+	font-weight: normal;
+	font-size: 0.9em;
+	color: #4a4c41 !important;
+}
+
+.node text {
+	cursor: pointer;
+}
+
+svg {
+	margin-top: 10px;
+	margin-left: 197.5px;
+}
+
+.grouped_elements {
+ 	display: inline;
+ 	margin-right: 10px;
+}
+
+.instruct {
+	font-size: 1.2em;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+}
+
+.credit {
+	background-color: rgba(47,48,17,0.5);
+	border-top: 5px solid #f4efdd;
+	padding: 5px;
+	font-family: 'Lora', serif;
+	position: fixed;
+	top: 70px;
+	width: 100%;
+	top: 91.5%;
+}
+
+#imageContainer {
+	overflow: scroll;
+	width: 500px;
+	height: 350px;
+	top: 245px;
+	position: absolute;
+	right: 100px;
+	bottom: 800px;
+	display: none;
+	padding: 5px;
+	border: 5px solid #2f3011;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color: #2f3011;
+	margin-bottom: 400px;
+}

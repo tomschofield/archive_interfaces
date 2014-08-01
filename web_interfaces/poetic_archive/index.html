@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Bloodaxe Books Digital Archives</title>
+
+	<!-- link to CSS stylesheet, fonts & plugins -->
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,900' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="magnific/dist/magnific-popup.css">
+	<link href="tipsy/tipsy.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="fancyBox/source/jquery.fancyBox.css" type="text/css" media="screen" />
+	<!--[if lt IE 9] >
+		<script src="dist/html5shiv.js"></script>
+	<![endif]-->
+
+	<!-- links to various javascript files used -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="d3/d3.js"></script>
+	<script src="script.js"/></script>
+	<script src="jquery.csv-0.71.js"/></script>
+	<script src="magnific/dist/jquery.magnific-popup.js"></script>
+	<script src="elevatezoom/jquery.elevatezoom.js" type="text/javascript"></script>
+	<script type="text/javascript" src="tipsy/jquery.tipsy.js"></script>
+	<script type="text/javascript" src="fancyBox/source/jquery.fancybox.pack.js"></script>
+
+	<meta name="keywords" content="generous interfaces, data visualisation, digital archive, poetry, d3 bubble chart"/>
+	<meta name="description" content="A represention of a digital archive based on the theory of Generous Interfaces."/>
+	<meta name="author" content="John Dawson"/>
+
+</head>
+
+<html lang="en">
+<body>
+
+	<header>
+		<div class="wrapper">
+			<h1 class="logo">Bloodaxe Digital Archive: Bubble Chart</h1>
+		</div> <!-- wrapper --> 
+	</header>
+
+	<article class="about">
+		<div class="wrapper">
+			<p>The aim of this site is to provide an alternative means of navigating a digital archive using <a href="http://mtchl.net/tag/generousinterfaces/" id="mail">Generous Interfaces.</a></p>
+			<p>The 'bubbles' have an author ID associated with them and their size is determined by the nunber of manuscripts available.</p>
+			<br/>
+			<p class="instruct">Please click on an author ID to view more detailed information.</p>
+		</div> <!-- wrapper -->
+	</article> <!-- about -->
+
+	<div id="mainBlock"></div>
+
+	<div id="imageContainer"></div>
+
+	<footer class="credit">
+		<div class="wrapper">
+			<h4 class="instruct">Credit</h4>
+			<p><a href="mailto:john@artgecko.co.uk" id="mail">John Dawson</a> & Tom Schofield @ <a href="http://www.ncl.ac.uk/culturelab/" id="mail">Culture Lab, Newcastle University</a></p>
+		</div> <!-- wrapper -->
+	</footer>
+
+</body>
+</html>
