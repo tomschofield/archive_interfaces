@@ -1,0 +1,63 @@
+
+<div id="container">
+
+	<div id="title_block" >
+ 		<h1 id="headerText1" ng-click="sharedFilter.txtfilter=''">The Poetics of the Archive</h1>
+ 		<h2 id="headerText2" ng-click="sharedFilter.txtfilter=''">Creative and Community Engagement with the Bloodaxe Archive</h2>
+ 		<div id="headerIntro">
+ 			<div id="headerIntroContent">
+ 			This is an interface to the catelogue and materials of the archive of Bloodaxe Books held at Newcastle University.
+ 			It is in an early stage of development and is being made available so that we can gain comments, criticism and insight from visitors. The catelogue and digitisation process is continuing so a lot of information is missing or incomplete. Let us know what you think about the design <a href="http://bloodaxe.ncl.ac.uk/sandpit/feedback/index.php"> here</a>.
+ 			</div>
+ 		</div>
+	</div>
+	
+	
+	<!-- <div id="filters" >
+		<div class="filter" ng-repeat="i in getTags()" ng-click="setFilter(i)">  
+			{{i.count}}
+		</div>	
+	</div>	 -->	
+	<div id="graph">
+ 			<div class="bar" ng-repeat="i in dates track by $index" ng-click="setFilter(i)"  ng-style='{"position":"absolute","left":($index*getBarWidth(getYearStats()))+"px" ,"top":-(1.3*i[1])+"px", "height":(1.3*i[1])+"px", "width":(getBarWidth(getYearStats())-1)+"px" }' >	</div>
+
+ 			<div class="live_bar" ng-repeat="i in liveDates track by $index" ng-click="setFilter(i)"  ng-style='{"position":"absolute","left":($index*getBarWidth(getYearStats()))+"px" ,"top":-(1.3*i[1])+"px", "height":(1.3*i[1])+"px", "width":(getBarWidth(getYearStats())-1)+"px" }' >	</div>
+
+ 			<div class="date_labels" ng-repeat="i in dates track by $index"  ng-style='{"position":"absolute","left":($index*getBarWidth(getYearStats()))+"px"}'  ng-if="$index%5==0">	{{i[0]}}</div>
+ 	</div>
+
+	<div id="formArea">
+ 		<form>
+ 			<input type="search" results ng-model='sharedFilter.txtfilter'> </input>
+ 			<!-- <input type="checkbox" data-ng-model='filterImages'  />
+ 			<input type="checkbox" data-ng-model='filterCovers'  /> -->
+ 		</form>
+		</div>
+		<div id = "posts"  ng-repeat="i in posts | filter: sharedFilter.txtfilter track by $index" ng-click="single_view=!single_view">
+			<!-- remove for comprehensive list -->
+			<!-- <div class="post" ng-if="i.hasImages" ng-if="i.hasCover"> -->
+				<!-- <div class="post" ng-if="i.hasImages"> -->
+			<div ng-if="$index<numToDisplay" class="post">
+			<!-- alt="{{debug(i)}}" -->
+
+				<img ng-if="i.hasImages" id="hasImagesThumb" src="hasImages.png" ></img>
+				<a href="#/grid/{{getShortId(i.id)}}" class="thumb"> <img ng-src="{{getFeaturedImage(i)}}" /></a>
+				<div class="post_content">
+ 					<a href="#/grid/{{getShortId(i.id)}}" class="thumb"><span class = "post_title"> {{i.title}}</span></a>
+	 				<!-- <span class = "tag" ng-repeat="j in i.terms.post_tag">
+							{{j.name}}
+						</span>
+	 				<p ng-bind-html="i.excerpt"></p> -->
+				</div>
+			</div>
+
+		</div>
+		<button id="see_more" type="button" ng-click="loadMore()">see more</button>
+		<button id="see_fewer" type="button" ng-click="loadFewer()">see fewer</button>
+	</div>
+
+</div>
+
+
+
+<!-- sharedFilter.txtfilter -->

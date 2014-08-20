@@ -1,0 +1,50 @@
+
+<div id="container">
+
+	<a href="#/grid/" style="text-decoration: none"> <div id="title_block">
+ 		<h1 id="headerText1">The Poetics of the Archive</h1>
+ 		<h2 id="headerText2">Creative and Community Engagement with the Bloodaxe Archive</h2>
+	</div> </a>
+	
+	
+	<div id="filters" ng-class="{'dropped':show_me}">
+		<div class="filter" ng-repeat="i in getTags()" ng-click="setFilter(i)">  
+			{{i.count}}
+		</div>	
+	</div>		
+	
+
+	
+	<div id="single_post" > 
+		<div id= "book_display" ng-show="getDisplay()"> 
+			<img id= "display_scan" ng-click="toggleDisplay()"  ng-src="{{getDisplaySrc()}}" >
+		</div>
+
+		<div ng-class="{'faded':show_me, 'post_tag_container' : true}" >
+			<!-- <div class="post_tags" ng-repeat="j in thisPost.terms.post_tag" ng-click="setFilter2(j)">
+				<a href="#/grid/" style="text-decoration: none; color:white">  <div > {{j.name}} </div> </a>
+
+			</div> -->
+		</div>
+		<div id="post_text">
+			<div class = "post_title"> {{getAuthor(thisPost.author)}} <br>{{thisPost.title}}  : {{thisPost.date}}<br>{{thisPost.id}} </div>
+
+			<div ng-repeat="i in thisPost.individualFiles">
+				<div id="aRecord">
+					<div class="item_title">{{i.title}} : {{i.date}}  </div>
+					<p ng-repeat="j in i.scopecontent"> {{j}} </p>
+
+					<div id ="thumbsContainer">
+						<div class = 'manuscript_thumb' ng-repeat="j in i.imagePaths track by $index">
+							<div ><img ng-src="{{j}}" ng-click="setDisplay(j, i)"/></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

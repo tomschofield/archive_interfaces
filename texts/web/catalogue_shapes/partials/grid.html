@@ -1,0 +1,70 @@
+
+
+	<!-- <canvas id="psketch" processing="sketch"></canvas> -->
+<div id="container">
+	<div id="title_block" >
+ 		<h1 id="headerText1" ng-click="sharedFilter.txtfilter=''">The Poetics of the Archive</h1>
+ 		<h2 id="headerText2" ng-click="sharedFilter.txtfilter=''">Creative and Community Engagement with the Bloodaxe Archive</h2>
+	</div>
+	
+	
+	<div id="filters" >
+		<div class="filter" ng-repeat="i in getTags()" ng-click="setFilter(i)">  
+			{{i.count}}
+		</div>	
+	</div>		
+	<!-- <div id="graph">
+ 			<div class="bar" ng-repeat="i in dates track by $index" ng-click="setFilter(i)"  ng-style='{"position":"absolute","left":($index*getBarWidth(getYearStats()))+"px" ,"top":-(1.3*i[1])+"px", "height":(1.3*i[1])+"px", "width":(getBarWidth(getYearStats())-1)+"px" }' >	</div>
+
+ 			<div class="live_bar" ng-repeat="i in liveDates track by $index" ng-click="setFilter(i)"  ng-style='{"position":"absolute","left":($index*getBarWidth(getYearStats()))+"px" ,"top":-(1.3*i[1])+"px", "height":(1.3*i[1])+"px", "width":(getBarWidth(getYearStats())-1)+"px" }' >	</div>
+
+ 			<div class="date_labels" ng-repeat="i in dates track by $index"  ng-style='{"position":"absolute","left":($index*getBarWidth(getYearStats()))+"px"}'  ng-if="$index%5==0">	{{i[0]}}</div>
+ 	</div> -->
+
+	<!-- <div id="formArea">
+ 		<form>
+ 			<input type="search" results ng-model='sharedFilter.txtfilter'> </input>
+ 		</form>
+
+	</div> -->
+	<div id="blockInstructions">
+		<div id="innerBlockInstructions">
+		Use the box to draw the form of a poem. We will try and match the shape from the archive.
+		</div>
+	</div>
+	<div id="blockContainer">
+
+		<div id="blockChooser" >
+			<!-- ng-mousedrag="onMouseDrag($event);" -->
+			<div ng-repeat ="i in grid track by $index" >
+				<div class='block'  ng-repeat="j in i track by $index" ng-mouseover="updateSquareColorAsBlack($parent.$index,$index)" ng-click="updateSquareColor($parent.$index,$index)" ng-style='{"background-color":getSquareColor($parent.$index,$index),   "position":"absolute","left":(10*$parent.$index)+"px" ,"top":(10*$index)+"px", "height":"10px", "width":"10px" }'>
+				</div>
+				<!-- <div ng-repeat="j in i track by $index"    ng-mousedrag="onMouseDrag($event);" ng-click="updateSquareColor($parent.$index,$index)" ng-style='{  "position":"absolute","left":(10*$parent.$index)+"px" ,"top":(10*$index)+"px", "height":"10px", "width":"10px" }' ng-class="{block:getState($parent.$index,$index), blackBlock:getBState($parent.$index,$index)}">
+				</div> -->
+			</div>
+			<!-- <div id="clearGrid" ng-click="clearGrid()"> clear grid</div> -->
+			<button id="clearGrid" type="button" ng-click="clearGrid()">Clear Grid</button>
+		</div>
+
+	</div>
+
+	<div id="shapeSearchResults">
+		<div class= "shape_result" ng-repeat ="i in filteredByShape" >
+			  <a href="#/grid/{{getTitleForThumb(i)}}"class="thumb"> <img ng-click ="getTitleForThumb(i)" ng-style='{"width": "100px" }' ng-src="{{addFilePath(i)}}"> </img>  </a>
+		</div>
+	</div>
+
+	<!-- <a href="#/grid/{{getTitleForThumb(i)}}"class="thumb"> </a> -->
+		<!-- {{i[0]}} -->
+	<!-- <div id="blockChooser" ng-repeat="(index, value) in getGrid()">        
+        	<div ng-repeat="(key,x) in value track by key"  ng-style='{"position":"absolute","left":(10*value)+"px" ,"top":(10*x)+"px", "height":"10px", "width":"10px" }'>{{x}}</div>
+        <br/>
+    </div> -->
+	<!-- </div> -->
+		
+	<!-- 	</div> -->
+</div>
+
+
+
+<!-- sharedFilter.txtfilter -->
