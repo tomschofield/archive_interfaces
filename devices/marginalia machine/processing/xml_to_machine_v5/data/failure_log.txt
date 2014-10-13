@@ -1,0 +1,8 @@
+19:11:37 failed on marginalia_of_BXB-1-2-TEN-1 Preface-Page 9 Ends_14_points.xml
+19:11:39 failed on marginalia_of_BXB-1-2-TEN-1 Preface-Page 9 Ends_18_points.xml
+19:12:12 failed on marginalia_of_BXB-1-1-BER-1-4 11-52_24_points.xml
+19:12:58 failed on marginalia_of_BXB-1-1-BER-1-4 11-52_24_points.xml
+19:13:10 failed on marginalia_of_BXB-1-1-CAS-2-3 Contents-Noon in Sante Fe_8_points.xml
+21:18:23 failed on marginalia_of_BXB-1-1-GRG-2-1 Five Parts in an Adventure-Kenny's Fax_1_points.xml
+21:18:30 failed on marginalia_of_BXB-1-1-GRG-2-1 Five Parts in an Adventure-Kenny's Fax_11_points.xml
+21:18:36 failed on marginalia_of_BXB-1-1-GRJ-1-1_13_points.xml

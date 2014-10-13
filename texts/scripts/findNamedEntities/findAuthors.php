@@ -73,8 +73,9 @@ function consolidateText(){
 function API_for_each(){
 
 	$dir    = './PDF_text';
+	echo $dir;
 	$files1 = scandir($dir);
-	//print_r($files1);
+	print_r($files1);
 	$allText = "";
 
 	for ($i=0; $i < sizeof($files1); $i++) { 
@@ -214,6 +215,6 @@ function consolidateNames(){
 	file_put_contents("popularity.txt", json_encode($namesAndPopularity));
 }
 consolidateNames();
-
+//API_for_each()
 
 ?>

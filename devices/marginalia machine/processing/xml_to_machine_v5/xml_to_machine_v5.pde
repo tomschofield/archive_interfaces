@@ -40,17 +40,19 @@ long timeOutThresh = 100;
 long timeOutThreshDefault = 100;
 String [] fnames;
 float [] scales;
-int numFiles=2;
-int fileCounter = 0;
+int numFiles=29;
+int fileCounter = 5;
 int xShift = 0;
 int yShift = 0;
 float xSize;
 float ySize;
 PVector [] duplicatePoints;
 int [] duplicateIndices;
+//six minute wait
+int waitTime = 360000;
 boolean restart = false;
 void setup() {
-  size(1400, 900);
+  size(1400, 800);
   String [] alist = Serial.list();
   for (int i =0; i<alist.length; i++) {
     println(i+" "+alist[i]);
@@ -67,12 +69,68 @@ void setup() {
   //  points = new ArrayList();
 
   fnames = new String[numFiles] ;
-  fnames[0] = "house_points.xml";
-  fnames[1] = "points.xml";
+
+
+
+  fnames[0] = "marginalia_of_BXB-1-1-BEN-1-4 Copyright-February_0_points.xml";
+  fnames[1] = "marginalia_of_BXB-1-1-BEN-1-4 Copyright-February_7_points.xml";
+  fnames[2] = "marginalia_of_BXB-1-1-BEN-1-4 Seeing Things-Modus Vivendi_2_points.xml";
+  fnames[3] = "marginalia_of_BXB-1-1-BEN-1-4 Seeing Things-Modus Vivendi_9_points.xml";
+  fnames[4] = "marginalia_of_BXB-1-1-BEN-1-5 Reject Setting-The Innocent_0_points.xml";
+  fnames[5] = "marginalia_of_BXB-1-1-BER-1-4 11-52_13_points.xml";
+  fnames[6] = "marginalia_of_BXB-1-1-BER-1-4 11-52_22_points.xml";
+  fnames[7] = "marginalia_of_BXB-1-1-BER-1-4 11-52_43_points.xml";
+  fnames[8] = "marginalia_of_BXB-1-1-CAS-2-3 Contents-Noon in Sante Fe_3_points.xml";
+  fnames[9] = "marginalia_of_BXB-1-1-GRG-1-4_2_points.xml";
+  fnames[10] = "marginalia_of_BXB-1-1-GRG-2-1 Five Parts in an Adventure-Kenny's Fax_1_points.xml";
+  fnames[11] = "marginalia_of_BXB-1-1-GRG-2-1 Five Parts in an Adventure-Kenny's Fax_11_points.xml";
+  fnames[12] = "marginalia_of_BXB-1-1-GRJ-1-1_13_points.xml";
+  fnames[13] = "marginalia_of_BXB-1-1-HYL-1-1 Cover-IX_4_points.xml";
+  fnames[14] = "marginalia_of_BXB-1-1-MOV-1-1_14_points.xml";
+  fnames[15] = "marginalia_of_BXB-1-2-TEN-1 Preface-Page 9 Ends_14_points.xml";
+  fnames[16] = "marginalia_of_BXB-1-2-TEN-1 Preface-Page 9 Ends_18_points.xml";
+
+  fnames[17] = "marginalia_of_BXB-1-1-BEN-1-4 Copyright-February_6_points.xml";
+  fnames[18] = "marginalia_of_BXB-1-1-BEN-1-4 Seeing Things-Modus Vivendi_5_points.xml";
+  fnames[19] = "marginalia_of_BXB-1-1-BER-1-4 11-52_24_points.xml";
+  fnames[20] = "marginalia_of_BXB-1-1-CAS-2-3 Contents-Noon in Sante Fe_8_points.xml";
+  fnames[21] = "marginalia_of_BXB-1-1-COS-2-2 1-8_4_points.xml";
+  fnames[22] = "marginalia_of_BXB-1-1-COS-3-4 Acknowledgements-Contents_0_points.xml";
+  fnames[23] = "marginalia_of_BXB-1-1-GRG-2-1 Five Parts in an Adventure-Kenny's Fax_1b_points.xml";
+  fnames[24] = "marginalia_of_BXB-1-1-GRJ-1-1_29_points.xml";
+  fnames[25] = "marginalia_of_BXB-1-1-GRJ-1-3 The Tutankamun Variations-Entr'acte_13_points.xml";
+  fnames[26] = "marginalia_of_BXB-1-2-TEN-1 Preface-Page 9 Ends_17_points.xml";
+  fnames[27] = "marginalia_of_BXB-1-4-AST-1-4 D M Thomas_1_points.xml";
+  fnames[28] = "marginalia_of_BXB-1-4-AST-1-4 David Constantine_2_points.xml";
+  //  fnames[17] = "marginalia_of_BXB-1-4-AST-1-4 Alan Plater_0_points.xml";
+  //  fnames[18] = "house_points.xml";
+  //  fnames[19] = "points.xml";
 
   scales = new float [numFiles];
-  scales[0]  = 3.0;
-  scales[1] = 2.0;
+  for (int i=0; i<scales.length; i++) {
+    scales[i] = 2.0;
+  }
+  scales[21] = 3.0;
+  //  scales[0]  = 3.0;
+  //  scales[1] = 2.0;
+  //  scales[2]  = 2.0;
+  //  scales[3] = 2.0;
+  //  scales[4]  = 2.0;
+  //  scales[5] = 2.0;
+  //  scales[6]  = 2.0;
+  //  scales[7] = 2.0;
+  //  scales[8]  = 2.0;
+  //  scales[9] = 2.0;
+  //  scales[10]  = 2.0;
+  //  scales[11] = 2.0;
+  //  scales[12]  = 2.0;
+  //  scales[13] = 2.0;
+  //  scales[14]  = 2.0;
+  //  scales[15] = 2.0;
+  //  scales[16]  = 2.0;
+  //  //  scales[17] = 1.0;
+  //  //  scales[18]  = 2.0;
+  //  //  scales[19] = 2.0;
 
 
 
@@ -84,17 +142,30 @@ void setup() {
 }
 
 void draw() {
-  scale(1/xSize, 1/ ySize);
+//
+//  if (frameCount>1000) {
+//    if (!started) {
+//      sendPoint(sendPoints[count].x, sendPoints[count].y, 0, 0);
+//      sendPenToggle((int)sendPoints[count].z);
+//      count++;
+//      if (count>=sendPoints.length) {
+//        count= 0;
+//      }
+//      started = true;
+//    }
+//  }
+
+  scale(1/xSize, 1/ xSize);
   background(100);
   if (!useSerial) {
     if (frameCount%50==0) {
       count++;
     }
   }
-  fill(0, 200, 0);
-  for (int i = 0; i<duplicatePoints.length; i++) {
-    ellipse(duplicatePoints[i].x, duplicatePoints[i].y, 5, 5);
-  }
+  //  fill(0, 200, 0);
+  //  for (int i = 0; i<duplicatePoints.length; i++) {
+  //    ellipse(duplicatePoints[i].x, duplicatePoints[i].y, 5, 5);
+  //  }
   noFill();
   stroke(244);
   strokeWeight(1);
@@ -117,9 +188,10 @@ void draw() {
   pos+=str(targetX);//sendPoints[count].x); 
   pos+=", ";
   pos+=str(targetY);//sendPoints[count].y);
+  pos+="\nWriting "+fnames[fileCounter-1];
   textFont(font, 48);
 
-  text(pos, 310, 40);
+  text(pos, 10, (ySize* height)-200);
 
   //to do make this linked to the distance btween this point and the previous
   //change this to request position first!
@@ -131,15 +203,51 @@ void draw() {
 
     timeOut = millis();
     timeOutThresh+=1000;
+    //if we've really been waiting for ages...like a minute say...
+    if (timeOutThresh>30000) {
+
+      //lets log the fail
+      String [] log = loadStrings("failure_log.txt");
+      PrintWriter output;
+      output = createWriter("data/failure_log.txt");
+      for (int i=0; i<log.length; i++) {
+        output.println(log[i]);
+      }
+      String failure_message = "";
+      failure_message+= str(day());
+      failure_message+= ":";
+      failure_message+= str(hour());
+      failure_message+= ":";
+      failure_message+= str(minute());
+      failure_message+= " failed on "+fnames[fileCounter-1];
+
+
+      output.print(failure_message);
+      output.flush();
+      output.close();
+
+      //and restart
+      restart=true;
+    }
   }
 
 
   if (restart) {
+    //send the pen home
+    println("sending home");
+    myPort.write('U');//"H");
+    myPort.write(10);
+    delay(1000); 
+
+    myPort.write('I');
+    myPort.write(10);
+
+    delay(1500); 
     //send a paper advance message
     myPort.write('P');//"H");
     myPort.write(10);
-    //wait for the paper to advance
-    delay(30000); 
+    //wait for the paper to advance and then sit there for a few minutes allowing the solenoid to cool
+    delay(waitTime); 
     //now go for it
     startNewImage();
     restart =false;
@@ -226,9 +334,10 @@ void keyPressed() {
     myPort.write(10);
   }
   if (key=='f'||key=='F') {
-
-    //myPort.write('F');//"H");
-    //myPort.write(10);
+//choose the next file
+    //fileCounter++;
+    if (fileCounter>=scales.length) fileCounter = 0;
+    loadDoc(fnames[fileCounter]);
   }
   if (key=='h'||key=='H') {
 
@@ -237,6 +346,10 @@ void keyPressed() {
   }
   if (key=='p'||key=='P') {
     myPort.write('P');
+    myPort.write(10);
+  }
+  if (key=='i'||key=='I') {
+    myPort.write('I');
     myPort.write(10);
   }
 }
@@ -576,7 +689,7 @@ PVector [] checkForDuplicates(PVector [] vectors) {
   ArrayList duplicates = new ArrayList();
   for (int i =0; i<vectors.length-1; i++) {
     if (vectors[i].x == vectors[i+1].x && vectors[i].y == vectors[i+1].y) {
-      println(i+"has a duplicate"); 
+      //println(i+"has a duplicate"); 
       duplicates.add(vectors[i]);
       duplicates.add(vectors[i+1]);
     }
@@ -594,7 +707,7 @@ int [] getDuplicateIndices(PVector [] vectors) {
   output = createWriter("duplicates.txt");
   for (int i =0; i<vectors.length-1; i++) {
     if (vectors[i].x == vectors[i+1].x && vectors[i].y == vectors[i+1].y) {
-      println(i+"has a duplicate"); 
+      //println(i+"has a duplicate"); 
       duplicates.add(i);
       duplicates.add(i+1);
 
@@ -637,9 +750,12 @@ PVector getLastNonIdenticalPoint(PVector thisPoint, int thisIndex) {
 }
 
 void loadDoc(String fname) {
+
   timeOut = millis();
+
   xSize = scales[fileCounter];
-  ySize = scales[fileCounter];
+  ySize = 1.3*scales[fileCounter];
+
   XML xml = loadXML("font_points.xml");
   drawPs =loadXML(fname);
   XML[] children = xml.getChildren("alphabet");
@@ -667,7 +783,8 @@ void startNewImage() {
   PVector startOver = new PVector(0, 0, 0);
   sendPoint(startOver.x, startOver.y, 0, 0);
   sendPenToggle((int)startOver.z);
-
+  if (fileCounter>=scales.length) fileCounter = 0;
   loadDoc(fnames[fileCounter]);
+  timeOut = millis();
 }
 
